@@ -1,10 +1,11 @@
-//: [Previous](@previous)
-
+/*:
+[Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
+# Protocol
+*/
 import Foundation
 
 var str = "Hello, playground"
 
-/// Protocol
 // Declaring Protocol Adoption with an Extension
 protocol TextRepresentable {
     var textualDescription: String { get }
@@ -63,13 +64,13 @@ struct UnleadedGasoline: Fuel {
 ///
 //
 /*
- class Car: Automobile {
- typealias FuelType = UnleadedGasoline
- typealias ExhaustType = CleanExhaust
- func drive(fuel: UnleadedGasoline) -> CleanExhaust {
- return fuel.consume()
- }
- }
+class Car: Automobile {
+    typealias FuelType = UnleadedGasoline
+    typealias ExhaustType = CleanExhaust
+    func drive(fuel: UnleadedGasoline) -> CleanExhaust {
+        return fuel.consume()
+    }
+}
  */
 //
 class Car: Automobile {
@@ -90,57 +91,57 @@ fuelType.emit()
 
 /*
  ///
- public protocol Automobile {
- associatedtype FuelType
- associatedtype ExhaustType
- func drive(fuel: FuelType) -> ExhaustType
- }
- public protocol Fuel {
- associatedtype ExhaustType
- func consume() -> ExhaustType
- }
- public protocol Exhaust {
- init()
- func emit()
- }
- 
- /// 使用结构体并增加Generic
- public struct UnleadedGasoline<E: Exhaust>: Fuel {
- //public typealias ExhaustType = E
- public func consume() -> E {
- print("...consuming unleaded gas...")
- return E()
- }
- }
- 
- public struct CleanExhaust: Exhaust {
- public init() {}
- public func emit() {
- print("...this is some clean exhaust...")
- }
- }
- 
- //public class Car<F: Fuel,E: Exhaust>: Automobile
- //    where F.ExhaustType == E {
- //        public func drive(fuel: F) -> E {
- //            return fuel.consume()
- //        }
- //}
- //var fusion = Car<UnleadedGasoline<CleanExhaust>, CleanExhaust>()
- 
- ///
- public class Car<F: Fuel>: Automobile {
- //public typealias FuelType = F
- public func drive(fuel: F) -> F.ExhaustType { return fuel.consume() }
- }
- 
- var fusion = Car<UnleadedGasoline<CleanExhaust>>()// fusion是福特（福特车英文名）
- var unleadedGasoline = UnleadedGasoline<CleanExhaust>()
- var cleanExhaust = fusion.drive(fuel: unleadedGasoline)
- cleanExhaust.emit()
- //fusion.drive(fuel: UnleadedGasoline<CleanExhaust>()).emit()
- // prints "...consuming unleaded gas..."
- // prints "...this is some clean exhaust..."
+public protocol Automobile {
+associatedtype FuelType
+associatedtype ExhaustType
+func drive(fuel: FuelType) -> ExhaustType
+}
+public protocol Fuel {
+associatedtype ExhaustType
+func consume() -> ExhaustType
+}
+public protocol Exhaust {
+init()
+func emit()
+}
+
+/// 使用结构体并增加Generic
+public struct UnleadedGasoline<E: Exhaust>: Fuel {
+    //public typealias ExhaustType = E
+    public func consume() -> E {
+    print("...consuming unleaded gas...")
+        return E()
+    }
+}
+
+public struct CleanExhaust: Exhaust {
+    public init() {}
+    public func emit() {
+        print("...this is some clean exhaust...")
+    }
+}
+
+//public class Car<F: Fuel,E: Exhaust>: Automobile
+//    where F.ExhaustType == E {
+//        public func drive(fuel: F) -> E {
+//            return fuel.consume()
+//        }
+//}
+//var fusion = Car<UnleadedGasoline<CleanExhaust>, CleanExhaust>()
+
+///
+public class Car<F: Fuel>: Automobile {
+//public typealias FuelType = F
+public func drive(fuel: F) -> F.ExhaustType { return fuel.consume() }
+}
+
+var fusion = Car<UnleadedGasoline<CleanExhaust>>()// fusion是福特（福特车英文名）
+var unleadedGasoline = UnleadedGasoline<CleanExhaust>()
+var cleanExhaust = fusion.drive(fuel: unleadedGasoline)
+cleanExhaust.emit()
+//fusion.drive(fuel: UnleadedGasoline<CleanExhaust>()).emit()
+// prints "...consuming unleaded gas..."
+// prints "...this is some clean exhaust..."
  */
 
 /*
@@ -269,4 +270,4 @@ var device = Device(term: "iWatch")
 //var device = Device(term: "")
 //Device.AppleWatch
 
-//: [Next](@next)
+//: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)

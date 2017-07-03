@@ -1,5 +1,7 @@
-//: [Previous](@previous)
-
+/*:
+[Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
+# [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
+*/
 import Foundation
 
 var str = "Hello, playground"
@@ -119,27 +121,27 @@ default:
 // Prints "Mostly harmless"
 
 
- var sum: Int = 0
- sum = 3
- switch sum {
- case 1: print("1")
- case 2: print("2")
- case 3: print("3")
- default: print("others")
- }
- sum = 2
- sum = 3
- 
- func manageSwitch(sum: Int) {
- switch sum {
- case 1: print("1")
- case 2: print("2")
- case 3: print("3")
- default: print("others")
- }
- }
- manageSwitch(sum: 2)
- manageSwitch(sum: 3)
+var sum: Int = 0
+sum = 3
+switch sum {
+    case 1: print("1")
+    case 2: print("2")
+    case 3: print("3")
+    default: print("others")
+}
+sum = 2
+sum = 3
+
+func manageSwitch(sum: Int) {
+    switch sum {
+        case 1: print("1")
+        case 2: print("2")
+        case 3: print("3")
+        default: print("others")
+    }
+}
+manageSwitch(sum: 2)
+manageSwitch(sum: 3)
  
 
-//: [Next](@next)
+//: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)

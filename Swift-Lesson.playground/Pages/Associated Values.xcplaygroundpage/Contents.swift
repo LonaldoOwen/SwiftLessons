@@ -1,12 +1,10 @@
-//: [Previous](@previous)
+/*:
+[Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
+# Associated Values
 
+*/
 import Foundation
 
-var str = "Hello, playground"
-
-/**
- Associated Values
- */
 //它的意思是：定义一个枚举类型叫：Barcode，这个枚举有两个value：upc()和qrCode()，upc的关联类型是(Int,Int,Int,Int),qrCode的关联类型String
 enum Barcode {
     case upc(Int, Int, Int, Int)
@@ -136,4 +134,8 @@ print(evaluate(product))
 ////print (Device.iPhone.introduced())
 //print(Device.iPad.desription)
 
-//: [Next](@next)
+
+
+
+
+//: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
