@@ -5,11 +5,11 @@
         <page name='Generic'/>
         <page name='Protocol'/>
         <page name='Enumeration'/>
-        <page name='Associated Values'/>
         <page name='Closure'/>
         <page name='Methods'/>
-        <page name='Protocol From Ray'/>
-        <page name='MarkUp'/>
         <page name='Untitled Page'/>
+        <page name='Associated Values'/>
+        <page name='MarkUp'/>
+        <page name='Protocol From Ray'/>
     </pages>
 </playground>
