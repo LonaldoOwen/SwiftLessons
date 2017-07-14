@@ -12,5 +12,8 @@
         <page name='MarkUp'/>
         <page name='Protocol From Ray'/>
         <page name='NetWorkPage'/>
+        <page name='Statments'/>
+        <page name='Error Handling'/>
+        <page name='Extensions'/>
     </pages>
 </playground>
