@@ -14,6 +14,7 @@
         <page name='NetWorkPage'/>
         <page name='Statments'/>
         <page name='Error Handling'/>
-        <page name='Extensions'/>
+        <page name='Helper'/>
+        <page name='Extension'/>
     </pages>
 </playground>

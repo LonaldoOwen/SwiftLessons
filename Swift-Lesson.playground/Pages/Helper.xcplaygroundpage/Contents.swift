@@ -31,9 +31,12 @@ backView.addSubview(view1)
 backView.addSubview(view2)
 
 
-
-
-
+/// NSPredicate
+/* Elements matching predicate 'elementType == 9 AND "忘记密码？" IN identifiers' */
+var predicate: NSPredicate!
+predicate = NSPredicate(format: "lementType == %d AND identifier == %@", argumentArray: [9, "忘记密码？"])
+predicate = NSPredicate(format: "lementType == %d AND %@ IN identifiers", argumentArray: [9, "忘记密码？"])
+predicate = NSPredicate(format: "lementType == %d AND identifiers CONTAINS '忘记密码？'", argumentArray: [9])
 
 
 
