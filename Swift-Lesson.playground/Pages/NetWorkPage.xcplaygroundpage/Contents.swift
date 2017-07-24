@@ -11,7 +11,7 @@ import PlaygroundSupport
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-
+/*
 ///
 let headers: [String: String] = [
     "Content-Type": "application/json",
@@ -40,18 +40,6 @@ Network.request(method: "POST", url: url, headers: headers, parameters: paramete
     PlaygroundPage.current.finishExecution()
 }
 
-
-let mp3Url = "https://res.wx.qq.com/voice/getvoice?mediaid=MzIwMjg5Njg5N18yMjQ3NDg0Mjg1"
-//let request = URLRequest()
-let session = URLSession.shared
-let task = session.dataTask(with: URL(string: mp3Url)!) { (data, response, error) in
-    //
-    print("response: \(String(describing: response))")
-    print("data: \(String(describing: data))")
-}
-task.resume()
-    
-
 //
 Network.get(url: "http://music.163.com/#/my/m/music/playlist?id=781294334") { (data, response, error) in
     //
@@ -63,8 +51,13 @@ Network.get(url: "http://music.163.com/#/my/m/music/playlist?id=781294334") { (d
 Network.get(url: "http://music.163.com/#/my/m/music/playlist", headers: [:], parameters: ["id": "781294334", "name": "free", "type": "audio"]) { (data, response, error) in
     print("response: \(response)")
 }
+*/
 
-
+// 请求公众号里的mp3文件
+let mp3Url = "https://res.wx.qq.com/voice/getvoice?mediaid=MzIwMjg5Njg5N18yMjQ3NDg0Mjg1"
+Network.get(url: mp3Url) { (data, response, error) in
+    print("response: \(String(describing: response))")
+}
 
 
 
