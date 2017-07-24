@@ -84,44 +84,56 @@ let fixedPoint = SomePoint(x: 4.0, y: 4.0)
 
 
 
-// MARK--type methods
+/// MARK--type methods
 print("MARK--type methods")
+// type methods形式及调用
+class SomeClass {
+    static func someTypeClassCanNotBeSubclss() {
+        // type method implementation goes here
+    }
+    class func someTypeClassCanBeSubclass() {
+        // type method implementation goes here
+    }
+}
+// 调用type methods(使用点语法，Type＋点＋type method)
+SomeClass.someTypeClassCanNotBeSubclss()
 
+// 实例
 struct LevelTracker {
-static var highestUnlockedLevel = 1
-var currentLevel = 1
+    static var highestUnlockedLevel = 1     // Type property
+    var currentLevel = 1                    // instance property
 
-static func unlock (_ level: Int) {
-if level > highestUnlockedLevel {
-highestUnlockedLevel = level
-}
-}
-static func isUnlocked (_ level: Int) -> Bool {
-return level <= highestUnlockedLevel
-}
+    static func unlock (_ level: Int) {     // Type method
+        if level > highestUnlockedLevel {
+            highestUnlockedLevel = level
+        }
+    }
+    static func isUnlocked (_ level: Int) -> Bool { // Type method
+        return level <= highestUnlockedLevel
+    }
 
-@discardableResult
-mutating func advance (to level: Int) -> Bool {
-if LevelTracker.isUnlocked(level) {
-currentLevel = level
-return true
-} else {
-return false
-}
-}
+    @discardableResult
+    mutating func advance (to level: Int) -> Bool {
+        if LevelTracker.isUnlocked(level) {
+            currentLevel = level
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 class Player {
-var tracker = LevelTracker()
-let playerName: String
+    var tracker = LevelTracker()
+    let playerName: String
 
-func complete(level: Int) {
-LevelTracker.unlock(level + 1)
-tracker.advance(to: level + 1)
-}
-init(name: String) {
-playerName = name
-}
+    func complete(level: Int) {
+        LevelTracker.unlock(level + 1)
+        tracker.advance(to: level + 1)
+    }
+    init(name: String) {
+        playerName = name
+    }
 }
 
 var player = Player(name: "Argryios")
@@ -131,9 +143,9 @@ print("highest unlocked level is now \(LevelTracker.highestUnlockedLevel)")
 
 player = Player(name: "Beto")
 if player.tracker.advance(to: 6) {
-print("player is now on level 6")
+    print("player is now on level 6")
 } else {
-print("level 6 has not yet been unlocked")
+    print("level 6 has not yet been unlocked")
 }
  
 
