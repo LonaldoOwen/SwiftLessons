@@ -40,6 +40,18 @@ great(person: ["name": ""])
 
 // example2: throw(见error handling)
 
+//
+let a: String = "A"
+let b: String = "B"
+func testFunction(_ string: String) {
+    guard a == "" else {
+        print("a: \(a)")
+        return
+    }
+    print("b: \(b)")
+}
+testFunction(a)
+
 
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)

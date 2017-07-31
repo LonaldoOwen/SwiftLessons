@@ -53,12 +53,19 @@ Network.get(url: "http://music.163.com/#/my/m/music/playlist", headers: [:], par
 }
 */
 
+/*
 // 请求公众号里的mp3文件
 let mp3Url = "https://res.wx.qq.com/voice/getvoice?mediaid=MzIwMjg5Njg5N18yMjQ3NDg0Mjg1"
 Network.get(url: mp3Url) { (data, response, error) in
     print("response: \(String(describing: response))")
 }
+*/
 
+//
+Network.get(url: "http://zentao.cct.cn/app/get-worst-all") { (data, response, error) in
+    //
+    print("response: \(String(describing: response))")
+}
 
 
 
