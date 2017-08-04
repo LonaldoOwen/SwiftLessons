@@ -12,6 +12,32 @@ import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
 /*
+/// 请求url获取HTML源码
+//URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
+func request(httpUrl: String) {
+    
+    let url: NSURL = NSURL(string: httpUrl)!
+    var request = URLRequest(url: url as URL)
+    request.timeoutInterval = 10
+    request.httpMethod = "GET"
+    
+    let configuration: URLSessionConfiguration = URLSessionConfiguration.default
+    let session:URLSession = URLSession(configuration: configuration)
+    let dataTask:URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
+        if error != nil {
+            print("error")
+        } else {
+            print("response:\(response)")
+        }
+    }
+    dataTask.resume()
+}
+let urlString = "http://www.baidu.com"
+request(httpUrl: urlString)
+*/
+
+
+/*
 ///
 let headers: [String: String] = [
     "Content-Type": "application/json",
