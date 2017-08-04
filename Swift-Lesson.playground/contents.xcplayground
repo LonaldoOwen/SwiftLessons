@@ -17,5 +17,6 @@
         <page name='NetWorkPage'/>
         <page name='Statments'/>
         <page name='ARC'/>
+        <page name='Temp'/>
     </pages>
 </playground>
