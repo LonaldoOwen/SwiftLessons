@@ -11,12 +11,13 @@
         <page name='Untitled Page'/>
         <page name='Associated Values'/>
         <page name='Protocol From Ray'/>
+        <page name='ARC'/>
         <page name='Error Handling'/>
         <page name='Extension'/>
         <page name='Helper'/>
         <page name='NetWorkPage'/>
         <page name='Statments'/>
-        <page name='ARC'/>
         <page name='Temp'/>
+        <page name='Collection Types'/>
     </pages>
 </playground>
