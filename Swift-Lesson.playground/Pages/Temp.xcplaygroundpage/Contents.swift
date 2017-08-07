@@ -55,9 +55,53 @@ bedFreeByRemainder(forPersonNumber: 9, bedsPerRoom: 3)
 
 
 
+/// protocol programing
+/// 蜂巢CCTKit实现方式
+
+final public class Proxy<Type> {
+    
+    let core: Type
+    init(_ core: Type) {
+        self.core = core
+    }
+    
+}
+
+public protocol CCTProxy {
+    
+    associatedtype ProxyType
+    var cct: ProxyType { get }
+    static var cct: ProxyType.Type { get }
+    
+}
+
+public extension CCTProxy {
+    
+    public var cct: Proxy<Self> { return Proxy(self) }
+    public static var cct: ProxyType.Type { return ProxyType.self }
+    
+}
+
+extension String: CCTProxy { }
+
+extension Proxy where Type == String {
+    
+    public func show() {
+        print(core)
+        print("show")
+    }
+}
 
 
+let str = "abc"
+print(str.cct)
+print(str.cct.core)
+str.cct.show()
 
+let str2 = Proxy<String>.init("temp")
+print(str2)
+print(str2.core)
+str2.core.cct
 
 
 

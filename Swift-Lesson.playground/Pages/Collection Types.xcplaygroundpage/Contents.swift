@@ -217,19 +217,36 @@ struct DataModel {
 //}
 
 // 在map中要获取Array的index，使用Array.enumerated().map {}
-var dataModels = cast.enumerated().map { (index, value) -> DataModel in
-    DataModel(
+//var dataModels = cast.enumerated().map { (index, value) -> DataModel in
+//    DataModel(
+//        name: value,
+//        index: String(index)
+//    )
+//}
+// 上面的形式的简单写法
+//dataModels = cast.enumerated().map {
+//    DataModel(
+//        name: $1,
+//        index: String($0)
+//    )
+//}
+
+// Xcode9
+var dataModels = cast.enumerated().map { (arg) -> DataModel in
+    
+    let (index, value) = arg
+    return DataModel(
         name: value,
         index: String(index)
     )
 }
 // 上面的形式的简单写法
-dataModels = cast.enumerated().map {
-    DataModel(
-        name: $1,
-        index: String($0)
-    )
-}
+// Xcode9, 编译报错
+//dataModels = cast.enumerated().map {
+//    DataModel(
+//        name: $1,
+//        index: String($0)
+//}
 
 
 /// flatMap<ElementOfResult>((Element) -> ElementOfResult?)
