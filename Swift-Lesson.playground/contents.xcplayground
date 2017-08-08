@@ -4,20 +4,20 @@
         <page name='Tablbe of contents'/>
         <page name='MarkUp'/>
         <page name='Generic'/>
-        <page name='Protocol'/>
+        <page name='Protocols'/>
+        <page name='Protocol From X'/>
+        <page name='Protocol From Ray'/>
         <page name='Enumeration'/>
         <page name='Closure'/>
         <page name='Methods'/>
-        <page name='Untitled Page'/>
         <page name='Associated Values'/>
-        <page name='Protocol From Ray'/>
         <page name='ARC'/>
         <page name='Error Handling'/>
         <page name='Extension'/>
         <page name='Helper'/>
         <page name='NetWorkPage'/>
         <page name='Statments'/>
-        <page name='Temp'/>
         <page name='Collection Types'/>
+        <page name='Temp'/>
     </pages>
 </playground>

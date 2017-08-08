@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 
 import Foundation
-
+import UIKit
 
 
 /// ceil,floor,round
@@ -77,18 +77,25 @@ public protocol CCTProxy {
 
 public extension CCTProxy {
     
-    public var cct: Proxy<Self> { return Proxy(self) }
-    public static var cct: ProxyType.Type { return ProxyType.self }
+    public var cct: Proxy<Self> { return Proxy(self) }              // instance property
+    public static var cct: ProxyType.Type { return ProxyType.self } // Type property
     
 }
 
 extension String: CCTProxy { }
+extension UIView: CCTProxy { }
 
 extension Proxy where Type == String {
     
     public func show() {
-        print(core)
-        print("show")
+        //print(core)
+        print("show: \(core)")
+    }
+}
+
+extension Proxy where Type: UIView {
+    public func showUIView() {
+        print("showUIView: \(core)")
     }
 }
 
@@ -101,8 +108,20 @@ str.cct.show()
 let str2 = Proxy<String>.init("temp")
 print(str2)
 print(str2.core)
+print(str2.show())
 str2.core.cct
 
+let someInt = Proxy<Int>.init(100)
+print(someInt)
+print(someInt.core)
+print(String.cct)
+
+
+let view = UIView()
+print(view.cct)
+print(view.cct.core)
+print(view.cct.showUIView())
+print(UIView.cct)
 
 
 
