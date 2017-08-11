@@ -5,6 +5,9 @@
 import Foundation
 import UIKit
 
+import PlaygroundSupport
+
+
 var str = "Hello, playground"
 
 /// Enumerations
@@ -146,6 +149,7 @@ manageSwitch(sum: 3)
 
 
 
+
 /// 应用实例
 
 // Nested Enumerations
@@ -209,6 +213,55 @@ var device = HelpEnum.Devices.iPhone4
 print(color)
 print(font.hashValue)
 print(device.rawValue)
+
+/// 复杂用法
+// 嵌套枚举 ＋ enumeration Type property
+// 应用：可以用在Helper方法中定义UIColor、UIFont、等自定义数据
+enum Theme {
+    
+    enum Color {
+        // 定义Type property
+        static let border = UIColor(red: CGFloat(184/255.0), green: 201/255.0, blue: 238/255.0, alpha: 1)
+        static let shade = UIColor(red: CGFloat(227/255.0), green: 234/255.0, blue: 249/255.0, alpha: 1)
+        static let highlight = UIColor(red: CGFloat(14/255.0), green: 114/255.0, blue: 199/255.0, alpha: 1)
+    }
+    
+    enum Font {
+        static let codeVoice = UIFont(name: "Menlo-Regular", size: 14)!
+        static let myBold = UIFont(name: "Helvetica", size: 20)!
+    }
+    
+    enum Device {
+        static let iphone4 = CGSize(width: 320, height: 480)
+        static let iphone5 = CGSize(width: 320, height: 568)
+        static let iphone6 = CGSize(width: 375, height: 667)
+        static let iphone6Plus = CGSize(width: 414, height: 736)
+    }
+    
+}
+
+var themeColor = Theme.Color.border
+themeColor = Theme.Color.shade
+themeColor = Theme.Color.highlight
+var themeFont = Theme.Font.codeVoice
+var themeDevice = Theme.Device.iphone4
+print(themeColor)
+print(themeFont)
+print(themeDevice)
+
+//
+let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+view.backgroundColor = UIColor.red
+view.bounds.size = Theme.Device.iphone4
+view.backgroundColor = Theme.Color.border
+PlaygroundPage.current.liveView = view
+
+
+
+
+
+
+
 
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
