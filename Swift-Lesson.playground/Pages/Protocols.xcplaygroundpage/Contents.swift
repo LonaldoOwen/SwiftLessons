@@ -75,6 +75,7 @@ protocol DiceGame {
     func play()
 }
 
+// 1.1 定义代理协议
 protocol DiceGameDelegate {
     func gameDidStart(_ game: DiceGame)
     func game(_ game: DiceGame, didStartNewTurnWithDiceRoll diceRoll: Int)
@@ -91,6 +92,7 @@ class SnakesAndLadders: DiceGame {
         board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
         board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
     }
+    // 1.2 创建代理变量
     var delegate: DiceGameDelegate?
     func play() {
         square = 0
@@ -113,6 +115,7 @@ class SnakesAndLadders: DiceGame {
     }
 }
 
+// 1.3 遵从代理
 class DiceGameTracker: DiceGameDelegate {
     var numberOfTurns = 0
     // 实现代理协议定义的方法

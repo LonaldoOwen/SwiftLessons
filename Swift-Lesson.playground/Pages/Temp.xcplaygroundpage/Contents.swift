@@ -53,6 +53,25 @@ func bedFreeByRemainder(forPersonNumber persons: Int, bedsPerRoom beds: Int) -> 
 bedFreeByRemainder(forPersonNumber: 1, bedsPerRoom: 3)
 bedFreeByRemainder(forPersonNumber: 9, bedsPerRoom: 3)
 
+/// iOS实现方式
+//var bedNumber: Int {
+//    if let bedsPerRoom = detail?.bedsPerRoom, bedsPerRoom != 0 {
+//        let num = bedsPerRoom - totalNumber % bedsPerRoom
+//        return num == bedsPerRoom ? 0 : num
+//    }
+//    return 0
+//}
+func bedFreForiOS(bedsPerRoom: Int?, totalNumber: Int) -> Int {
+    if let bedsPerRoom = bedsPerRoom, bedsPerRoom != 0 {
+        let num = bedsPerRoom - totalNumber % bedsPerRoom
+        return num == bedsPerRoom ? 0 : num
+    }
+    return 0
+}
+let num = bedFreForiOS(bedsPerRoom: 2, totalNumber: 31)
+
+
+
 
 
 /// protocol programing

@@ -3,6 +3,7 @@
 # Enumerations
 */
 import Foundation
+import UIKit
 
 var str = "Hello, playground"
 
@@ -142,6 +143,72 @@ func manageSwitch(sum: Int) {
 }
 manageSwitch(sum: 2)
 manageSwitch(sum: 3)
- 
+
+
+
+/// 应用实例
+
+// Nested Enumerations
+
+// 扩展CGSize，使其能用在enum中作为类型使用
+extension CGSize: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        let size = CGSizeFromString(value)
+        self.init(width: size.width, height: size.height)
+    }
+    public init(extendedGraphemeClusterLiteral value: String) {
+        let size = CGSizeFromString(value)
+        self.init(width: size.width, height: size.height)
+    }
+    public init(unicodeScalarLiteral value: String) {
+        let size = CGSizeFromString(value)
+        self.init(width: size.width, height: size.height)
+    }
+}
+
+enum HelpEnum {
+    
+    enum Devices: CGSize {
+        case iPhone4 = "{320, 480}"
+        case iPhone5 = "{320, 568}"
+        case iPhone6 = "{375, 667}"
+        case iPhone6Plus = "{414, 736}"
+    }
+    
+    enum Color {
+        case myColor(Int)
+        case systemColor(Int)
+        init?(number: Int) {
+            switch number {
+            case 1:
+                self = .myColor(1)
+            default:
+                self = .systemColor(0)
+            }
+        }
+
+    }
+    
+    enum Font {
+        case mySize11, mySize12
+    }
+}
+
+//enum Mycolor: UIColor {
+//    case one = UIColor.red
+//    case two = UIColor.green
+//}
+let red = UIColor.red
+let one = UIColor(red: 253/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1.0)
+
+
+
+var color = HelpEnum.Color.myColor(1)
+var font = HelpEnum.Font.mySize11
+var device = HelpEnum.Devices.iPhone4
+print(color)
+print(font.hashValue)
+print(device.rawValue)
+
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
