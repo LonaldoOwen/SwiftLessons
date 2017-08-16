@@ -60,6 +60,8 @@ enum CompassPoint {
 enum Planet {
     case mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
 }
+print(Planet.venus)
+print(Planet.earth)
 
 // 使用点语法来使用cases
 var directionToHead = CompassPoint.west
@@ -148,6 +150,28 @@ manageSwitch(sum: 2)
 manageSwitch(sum: 3)
 
 
+/// Raw Values
+enum ASCIIControlCharacter: Character {
+    case tab = "\t"
+    case lineFeed = "\n"
+    case carriageReturn = "\r"
+}
+print(ASCIIControlCharacter.tab)
+print(ASCIIControlCharacter.tab.rawValue)
+
+// integer类型rawValue，more第一个case=0，其他递增1
+enum PlanetRaw: Int {
+    case mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
+}
+print(PlanetRaw.venus)
+print(PlanetRaw.venus.rawValue)
+
+// 字符串类型的enum，rawValue默认为case
+enum CompassPointRaw: String {
+    case north, south, east, west
+}
+print(CompassPointRaw.south)
+print(CompassPointRaw.south.rawValue)
 
 
 /// 应用实例
