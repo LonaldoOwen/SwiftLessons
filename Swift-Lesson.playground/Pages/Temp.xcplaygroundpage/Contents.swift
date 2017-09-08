@@ -144,5 +144,35 @@ print(UIView.cct)
 
 
 
+/// float 精度
+
+// Float
+// 这种直接计算进度会有问题
+let fa: Float = 19999
+let fc: Float = 123456.01
+let sum: Float = fa + fc
+print("sum: \(sum)")
+
+// Double
+let da: Double = 19999
+let dc: Double = 123456.01
+let dSum: Double = da + dc
+
+// Decimal
+let decimalA: Decimal = 19999
+let decimalC: Decimal = 123456.01
+let decimalSum: Decimal = decimalA + decimalC
+
+// NSDecimalNumber
+let ndA: NSDecimalNumber = NSDecimalNumber(string: "19999")
+let ndC: NSDecimalNumber = NSDecimalNumber(string: "123456.01")
+let ndSum: NSDecimalNumber = ndA.adding(ndC)
+
+
+
+
+
+
+
 
 //: [Next](@next)
