@@ -9,12 +9,13 @@ import Foundation
 
 /// Generic
 
-// Type Constraints
+/// Type Constraints
 func findIndex(ofString valueToFind: String, in array: [String]) -> Int? {
+    
     for (index, value) in array.enumerated() {
-     if value == valueToFind {
-        return index
-     }
+        if value == valueToFind {
+            return index
+        }
     }
     return nil
 }
@@ -38,7 +39,7 @@ let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
 // stringIndex is an optional Int containing a value of 2
 
 
-// Associated Types
+/// Associated Types
 protocol Container {
     associatedtype Item // 声明Associated Type
     mutating func append(_ item: Item)
@@ -47,7 +48,7 @@ protocol Container {
 }
 
 
-// Generic Types
+/// Generic Types
 // Int Stack
 
 struct IntStack {
@@ -128,6 +129,7 @@ return items.removeLast()
 }
 */
 struct Stack<Element>: Container {
+    
     // original Stack implementation
     var items = [Element]()
     mutating func push(_ item: Element) {
@@ -189,7 +191,7 @@ arrayOfInt[2]
 extension Array: Container {}
 
 
-// Extending a Generic Type
+/// Extending a Generic Type
 extension Stack {
     var topItem: Element? {
         return items.isEmpty ? nil : items[items.count - 1]
@@ -219,6 +221,7 @@ if stackOfStrings.isTop("one") {
 
 // extend a protocol with where clause
 extension Container where Item: Equatable {
+    
     func startWith(_ item: Item) -> Bool {
         return count >= 1 && self[0] == item
     }
@@ -231,13 +234,14 @@ if [9, 9, 9].startWith(42) {
 
 // extend a protocol with where clause which type to be a specific type
 extension Container where Item == Double {
-func average() -> Double {
-var sum = 0.0
-for index in 0..<count {
-sum += self[index]
-}
-return sum / Double(count)
-}
+    
+    func average() -> Double {
+        var sum = 0.0
+        for index in 0..<count {
+            sum += self[index]
+        }
+        return sum / Double(count)
+    }
 }
 [1280.0, 11.0, 100.0, 123.4].average()
 [1.2, 2.2, 3.2].average()
@@ -247,6 +251,10 @@ return sum / Double(count)
 //stackOfInt.average()
 //stackOfFloat.average()
 stackOfDouble.average()
+
+
+
+
 
  
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)

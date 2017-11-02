@@ -77,6 +77,7 @@ let num = bedFreForiOS(bedsPerRoom: 2, totalNumber: 31)
 /// protocol programing
 /// 蜂巢CCTKit实现方式
 
+// 定义类：Proxy
 final public class Proxy<Type> {
     
     let core: Type
@@ -86,14 +87,16 @@ final public class Proxy<Type> {
     
 }
 
+// 定义协议：CCTProxy
 public protocol CCTProxy {
     
-    associatedtype ProxyType
+    associatedtype ProxyType // 关联类型
     var cct: ProxyType { get }
     static var cct: ProxyType.Type { get }
     
 }
 
+// 定义extension：扩展协议CCTProxy
 public extension CCTProxy {
     
     public var cct: Proxy<Self> { return Proxy(self) }              // instance property
@@ -104,15 +107,19 @@ public extension CCTProxy {
 extension String: CCTProxy { }
 extension UIView: CCTProxy { }
 
-extension Proxy where Type == String {
-    
-    public func show() {
-        //print(core)
-        print("show: \(core)")
-    }
-}
+/// swift3.0.2上编译报错
+/// error: same-type requirement makes generic parameter 'Type' non-generic？？？
+/// Generic里面也有个类似的就不报错？？？
+//extension Proxy where Type == String {
+//    
+//    public func show() {
+//        //print(core)
+//        print("show: \(core)")
+//    }
+//}
 
 extension Proxy where Type: UIView {
+    
     public func showUIView() {
         print("showUIView: \(core)")
     }
@@ -122,12 +129,12 @@ extension Proxy where Type: UIView {
 let str = "abc"
 print(str.cct)
 print(str.cct.core)
-str.cct.show()
+//str.cct.show()
 
 let str2 = Proxy<String>.init("temp")
 print(str2)
 print(str2.core)
-print(str2.show())
+//print(str2.show())
 str2.core.cct
 
 let someInt = Proxy<Int>.init(100)
@@ -145,6 +152,7 @@ print(UIView.cct)
 
 
 /// float 精度
+/// 使用NSDecimalNumber解决小数点.00问题
 
 // Float
 // 这种直接计算进度会有问题

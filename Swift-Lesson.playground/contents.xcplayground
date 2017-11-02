@@ -20,6 +20,5 @@
         <page name='Collection Types'/>
         <page name='Temp'/>
         <page name='Live View'/>
-        <page name='Optional Chaining'/>
     </pages>
 </playground>
