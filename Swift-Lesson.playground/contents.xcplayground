@@ -20,6 +20,10 @@
         <page name='Collection Types'/>
         <page name='Temp'/>
         <page name='Live View'/>
+<<<<<<< HEAD
         <page name='GCD'/>
+=======
+        <page name='Optional Chaining'/>
+>>>>>>> f7241a3bf9871cd37e69a73123e65177242de4cb
     </pages>
 </playground>

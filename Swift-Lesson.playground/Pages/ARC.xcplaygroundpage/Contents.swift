@@ -41,6 +41,7 @@ class Person {
 //reference3 = nil
 
 var person: Person?
+var anotherPerson: Person!
 
 person = Person(name: "Mike")
 person = Person(name: "Tom")

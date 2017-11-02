@@ -144,5 +144,68 @@ print(UIView.cct)
 
 
 
+/// float 精度
+
+// Float
+// 这种直接计算进度会有问题
+let fa: Float = 19999
+let fc: Float = 123456.01
+let sum: Float = fa + fc
+print("sum: \(sum)")
+
+// Double
+let da: Double = 19999
+let dc: Double = 123456.01
+let dSum: Double = da + dc
+
+// Decimal
+let decimalA: Decimal = 19999
+let decimalC: Decimal = 123456.01
+let decimalSum: Decimal = decimalA + decimalC
+
+// NSDecimalNumber
+let ndA: NSDecimalNumber = NSDecimalNumber(string: "19999")
+let ndC: NSDecimalNumber = NSDecimalNumber(string: "123456.01")
+let ndSum: NSDecimalNumber = ndA.adding(ndC)
+
+
+
+/// Data 转 String
+
+let string1 = "string1"
+let data1 = string1.data(using: String.Encoding.utf8)
+let string2 = String.init(data: data1!, encoding: String.Encoding.utf8)
+
+// image -> JPEG data -> string
+let image = UIImage.init(named: "加号")
+let pngData = UIImagePNGRepresentation(image!)
+// ???
+let pngContent = String.init(data: pngData!, encoding: String.Encoding.utf8)
+
+// image -> JPEG data -> base64 string
+let base64String = pngData?.base64EncodedString()
+let base64Data = Data.init(base64Encoded: base64String!)
+
+let utf8Data = base64String?.data(using: .utf8)
+//let tempString = String.init()
+
+
+
+//
+let path = Bundle.main.path(forResource: "", ofType: ".png")
+let fileContent = try? String.init(contentsOfFile: path!, encoding: String.Encoding.utf8)
+
+
+
+
+var body: NSMutableData = NSMutableData()
+body.append(data1!)
+body.append(pngData!)
+
+
+
+
+
+
 
 //: [Next](@next)
