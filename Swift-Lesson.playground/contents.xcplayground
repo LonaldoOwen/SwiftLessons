@@ -19,5 +19,7 @@
         <page name='Statments'/>
         <page name='Collection Types'/>
         <page name='Temp'/>
+        <page name='Live View'/>
+        <page name='GCD'/>
     </pages>
 </playground>
