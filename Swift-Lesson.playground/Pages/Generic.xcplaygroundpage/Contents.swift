@@ -231,13 +231,13 @@ if [9, 9, 9].startWith(42) {
 
 // extend a protocol with where clause which type to be a specific type
 extension Container where Item == Double {
-func average() -> Double {
-var sum = 0.0
-for index in 0..<count {
-sum += self[index]
-}
-return sum / Double(count)
-}
+    func average() -> Double {
+        var sum = 0.0
+    for index in 0..<count {
+        sum += self[index]
+    }
+        return sum / Double(count)
+    }
 }
 [1280.0, 11.0, 100.0, 123.4].average()
 [1.2, 2.2, 3.2].average()
