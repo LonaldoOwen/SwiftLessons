@@ -18,17 +18,18 @@ extension Double {
 let oneInch = 25.4.mm
 print("One Inch is \(oneInch) meters")
 // Prints "One inch is 0.0254 meters"
+
 let threeFeet = 3.ft
 print("Three feet is \(threeFeet) meters")
 // Prints Three feet is 0.914399970739201 meters
+
 let aMarathon = 42.km + 195.m
 print("A marathon is \(aMarathon) meters long")
 // Prints A marathon is 42195.0 meters long
 
 
-/// #Computed Properties
-
 /// #Initializers
+
 
 /// #Methods
 
