@@ -203,7 +203,24 @@ body.append(data1!)
 body.append(pngData!)
 
 
+/// array add object of type IndexPath
+/// 注意：Swift里面并未介绍如何使用optional类型的数组；因此创建数组不要用optional，可以先创建空数组
 
+// 定义optional类型数组
+//var indexPathToInsert: [IndexPath]!
+//let indexPath = IndexPath.init(row: 0, section: 1)
+//indexPathToInsert?.append(indexPath)
+// Result: indexPathToInsert = nil
+
+//var indexPathToInsert: [IndexPath]!
+//let indexPath = IndexPath.init(row: 0, section: 1)
+//indexPathToInsert!.append(indexPath)
+// Result: 报错“fatal error: unexpectedly found nil while unwrapping an Optional value”
+
+// 定义数组变量，并初始化为空数组
+var indexPathToInsert: [IndexPath] = []
+let indexPath = IndexPath.init(row: 0, section: 1)
+indexPathToInsert.append(indexPath)
 
 
 
