@@ -29,6 +29,7 @@ print("numbers is of type [Int] with \(numbers.count) items.")
 
 
 /// Creating an Array with a Default Value
+
 // Creates a new array containing the specified number of a single, repeated value.
 let fiveZs = Array(repeating: "Z", count: 5)
 print(fiveZs)
@@ -284,6 +285,36 @@ let someStrings = ["b", "aaaa", "Fsb", "Fs", "Bbb", "Ccc", "Aaaf", "Franch"]
 let greatestItem = someStrings.max()
 let lowestItem = someStrings.min()  // 如果是
 
+
+
+/// 实战实例
+
+/// 问题1、Swfit中Array变为value type了？？？
+// element为value type
+var valueArray = [1, 2]
+var valueArrayCopy = valueArray   // [1, 2]
+print(valueArray)
+print(valueArrayCopy)
+valueArray[0] = 3
+print(valueArray)                // [3, 2]
+print(valueArrayCopy)            // [1, 2]
+
+// element为class instance
+class Person {
+    var name: String
+    init(_ name: String) {
+        self.name = name
+    }
+}
+var person1 = Person("zhang")
+var person2 = Person("Li")
+var instanceArray = [person1, person2]
+var instanceArrayCopy = instanceArray
+print(instanceArray[0].name, instanceArray[1].name)
+print(instanceArrayCopy[0].name, instanceArrayCopy[1].name)
+person1.name = "wang"
+print(instanceArray[0].name, instanceArray[1].name)
+print(instanceArrayCopy[0].name, instanceArrayCopy[1].name)
 
 
 

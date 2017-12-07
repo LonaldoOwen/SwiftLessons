@@ -4,23 +4,17 @@
         <page name='Tablbe of contents'/>
         <page name='MarkUp'/>
         <page name='Generic'/>
-        <page name='Extension'/>
-        <page name='Protocols'/>
-        <page name='Protocol From X'/>
-        <page name='Protocol From Ray'/>
         <page name='Enumeration'/>
         <page name='Closure'/>
         <page name='Methods'/>
         <page name='Associated Values'/>
-        <page name='ARC'/>
+        <page name='Protocol From Ray'/>
         <page name='Error Handling'/>
+        <page name='Extension'/>
         <page name='Helper'/>
         <page name='NetWorkPage'/>
         <page name='Statments'/>
-        <page name='Collection Types'/>
+        <page name='ARC'/>
         <page name='Temp'/>
-        <page name='Live View'/>
-        <page name='Optional Chaining'/>
-        <page name='Initialization'/>
     </pages>
 </playground>
