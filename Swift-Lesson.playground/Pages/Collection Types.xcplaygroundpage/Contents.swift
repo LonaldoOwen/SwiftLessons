@@ -318,6 +318,29 @@ print(instanceArrayCopy[0].name, instanceArrayCopy[1].name)
 
 
 
+/// type casting in Array
+/// 说明：使用强制类型转换后，该变量变为constant
+
+let baseArray: [[Any]] = [[["key1": "value1", "key2": "value2", "items": [["username": "zs", "password": "123"]]]]]
+var baseArrayCopy = baseArray
+print(baseArray)
+print(baseArrayCopy)
+var iphoneFolder = baseArrayCopy[0]
+var folder = iphoneFolder[0]
+print(folder)
+//(folder["items"] as! [[String: Any]]).append(["username": "zs", "password": "123"])
+print(folder as! [String: Any])
+
+// error: cannot use mutating member on immutable value of type '[[String : Any]]'
+//((folder as! [String: Any])["items"] as! [[String: Any]]).append(["username": "zs", "password": "123"])
+// 说明：使用强制类型转换后，该变量变为constant
+let tempDict = ["items": [["username": "zs", "password": "123"]]]
+var tempDictCopy = tempDict
+//tempDictCopy["items"]?.append([:])    // 可以add element
+//(tempDictCopy["items"] as! [[String: Any]]).append([:])   // error
+print(tempDictCopy)
+
+
 
 
 
