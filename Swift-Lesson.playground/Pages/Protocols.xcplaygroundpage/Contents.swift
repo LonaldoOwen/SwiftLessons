@@ -18,6 +18,20 @@
 
 import Foundation
 
+/// Property Requirements
+
+protocol FullyNamed {
+    var fullName: String { get }
+}
+
+struct Person: FullyNamed {
+    var fullName: String
+}
+let john = Person(fullName: "John Appleseed")
+// john.fullName is "John Appleseed"
+
+
+
 
 /// Method Requirements
 protocol RandomNumberGenerator {
@@ -284,11 +298,23 @@ let library = [
 
 
 
+/// 实例应用
 
+protocol ItemValue {
+    
+}
 
+struct LoginItem: ItemValue {
+    var username: String
+    var password: String
+}
 
+struct CreditCardItem: ItemValue {
+    var bankName: String
+    var cardNumber: String
+}
 
-
+let renren = LoginItem(username: "Ronaldo", password: "123")
 
 
 
