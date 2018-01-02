@@ -225,4 +225,27 @@ indexPathToInsert.append(indexPath)
 
 
 
+/// Range、NSRange
+
+let passwordPool = "AaBbCc12345"
+for char in passwordPool {
+    print(char)
+}
+print(passwordPool.startIndex)
+print(passwordPool.endIndex)
+let randomIndex = 4
+let index = passwordPool.index(passwordPool.startIndex, offsetBy: randomIndex)
+let char = passwordPool[index]
+let subString = String(char)
+print("index: \(index)")
+print("char: \(char)")
+print("substring: \(subString)")
+
+
+
+
+
+
+
+
 //: [Next](@next)
