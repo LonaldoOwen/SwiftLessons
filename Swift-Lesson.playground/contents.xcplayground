@@ -22,5 +22,6 @@
         <page name='Live View'/>
         <page name='Optional Chaining'/>
         <page name='Initialization'/>
+        <page name='Date'/>
     </pages>
 </playground>
