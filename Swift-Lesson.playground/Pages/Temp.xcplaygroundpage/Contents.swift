@@ -242,6 +242,15 @@ print("char: \(char)")
 print("substring: \(subString)")
 
 
+/// Date、DateFormatter
+var now = Date.init(timeIntervalSinceNow: 0)
+let formater = DateFormatter.init()
+//formater.dateStyle = .medium
+//formater.timeStyle = .short
+formater.locale = NSLocale.init(localeIdentifier: "zh_CN") as Locale!
+formater.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+let str1 = formater.string(from: now)
+print(str1)
 
 
 
