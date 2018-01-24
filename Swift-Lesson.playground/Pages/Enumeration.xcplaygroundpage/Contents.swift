@@ -283,15 +283,71 @@ PlaygroundPage.current.liveView = view
 
 
 /// 实例
-enum ItemType: Int {
+
+//
+enum Persistent {
+    case iphone, icloud
+}
+print("#Persistent")
+print(Persistent.iphone)
+print(Persistent.icloud)
+
+enum PersistentInt: Int {
+    case iphone = 1, icloud
+    var type: String {
+        switch self {
+        case .iphone:
+            return "IPHONE"
+        case .icloud:
+            return "ICLOUD"
+        }
+    }
+}
+print("#PersistentInt")
+print(PersistentInt.iphone)
+print(PersistentInt.iphone.rawValue)
+print(PersistentInt.icloud)
+print(PersistentInt.icloud.rawValue)
+print(PersistentInt.iphone.type)
+
+
+
+enum PersistentString: String {
+    case iphone = "IPHONE"
+    case icloud = "ICLOUD"
+}
+print("#PersistentString")
+print(PersistentString.iphone)
+print(PersistentString.iphone.rawValue)
+
+
+//
+enum ItemInt: Int {
     case all = 0
     case login = 1
     case note = 2
+    
+    var type: String {
+        switch self {
+        case .all:
+            return "All Item Type on IPHONE"
+        case .login:
+            return "Login"
+        case .note:
+            return "Note"
+        }
+    }
 }
-print(ItemType.all)
-print(ItemType.all.rawValue)
-print(ItemType.note)
-print(ItemType.note.rawValue)
+print("#ItemInt")
+print(ItemInt.all)
+print(ItemInt.all.rawValue)
+print(ItemInt.all.type)
+print(ItemInt.note)
+print(ItemInt.note.rawValue)
+print(ItemInt.note.type)
+
+
+
 
 
 
