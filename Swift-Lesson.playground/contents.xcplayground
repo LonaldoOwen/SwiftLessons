@@ -22,7 +22,5 @@
         <page name='Live View'/>
         <page name='Optional Chaining'/>
         <page name='Initialization'/>
-        <page name='Strings and Charactors'/>
-        <page name='Date'/>
     </pages>
 </playground>

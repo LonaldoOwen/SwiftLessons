@@ -282,6 +282,16 @@ PlaygroundPage.current.liveView = view
 
 
 
+/// 实例
+enum ItemType: Int {
+    case all = 0
+    case login = 1
+    case note = 2
+}
+print(ItemType.all)
+print(ItemType.all.rawValue)
+print(ItemType.note)
+print(ItemType.note.rawValue)
 
 
 
