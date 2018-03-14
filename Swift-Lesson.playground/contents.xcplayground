@@ -25,5 +25,6 @@
         <page name='Initialization'/>
         <page name='Strings and Charactors'/>
         <page name='Date'/>
+        <page name='NSPredicate'/>
     </pages>
 </playground>
