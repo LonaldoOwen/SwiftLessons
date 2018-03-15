@@ -251,7 +251,11 @@ withUnsafePointer(to: &path2) { ptr in
 
 
 
-
+/*:
+ ## copy-on-write(写时才复制)
+ --赋值的时候，不分配内存；有写操作的时候才分配内存
+ 
+ */
 /// copy-on-write(写时才复制)
 /// 赋值的时候，不分配内存；有写操作的时候才分配内存
 ///
@@ -299,6 +303,7 @@ a = append_one(a)
 // "Cannot use mutating member on immutable value: 'a' is a 'let' constant"
 
 /// inplace mutation(through the usage of inout parameters)
+///
 func append_one_in_place(a: inout [Int]) {
     a.append(1)
 }
