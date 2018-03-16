@@ -8,7 +8,6 @@
         <page name='Protocols'/>
         <page name='Protocol From X'/>
         <page name='Protocol From Ray'/>
-        <page name='Protocol from WWDC'/>
         <page name='Enumeration'/>
         <page name='Closure'/>
         <page name='Methods'/>
@@ -23,11 +22,8 @@
         <page name='Live View'/>
         <page name='Optional Chaining'/>
         <page name='Initialization'/>
-        <page name='Date'/>
-<<<<<<< HEAD
-        <page name='NSPredicate'/>
-=======
         <page name='Strings and Charactors'/>
->>>>>>> 1729e24f14b568b73850454e60ac4124354876c9
+        <page name='Date'/>
+        <page name='NSPredicate'/>
     </pages>
 </playground>

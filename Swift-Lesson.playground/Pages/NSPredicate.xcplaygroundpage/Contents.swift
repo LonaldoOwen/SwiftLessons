@@ -12,6 +12,25 @@
 import Foundation
 
 
+class Person:NSObject {
+    @objc var firstName: String
+    @objc var lastName: String
+    @objc var age: Int
+    @objc var birthday: Date
+    
+    init(firstName: String, lastName: String, age: Int, birthday: Date) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.age = age
+        self.birthday = birthday
+    }
+}
+
+let zhangsan = Person(firstName: "san", lastName: "zhang", age: 20, birthday: Date.init())
+let lisi = Person(firstName: "si", lastName: "li", age: 30, birthday: Date())
+let wangwu = Person(firstName: "wu", lastName: "wang", age: 40, birthday: Date())
+let persons = [zhangsan, lisi, wangwu]
+
 
 /*:
  # NSPredicate
@@ -36,24 +55,74 @@ import Foundation
  
  */
 
-class Person:NSObject {
-    @objc var firstName: String
-    @objc var lastName: String
-    @objc var age: Int
-    @objc var birthday: Date
-    
-    init(firstName: String, lastName: String, age: Int, birthday: Date) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.age = age
-        self.birthday = birthday
-    }
-}
+/// String Constants, Variables, and Wildcards
+let prefix = "prefix"
+let suffix = "suffix"
+// SELF LIKE[c] "prefix*suffix"
+let wildcardsPredicate = NSPredicate(format: "SELF LIKE[c] %@", prefix.appending("*").appending(suffix))
+let wildcardsResult = wildcardsPredicate.evaluate(with: "prefixxxxxxxxxsuffix")
+// 报错
+//let errorWildcardsPredicate = NSPredicate(format: "SELF LIKE[c] %@*%@", prefix, suffix)
+//let errorWildcardsResult = errorWildcardsPredicate.evaluate(with: "prefixxxxxxxxxsuffix")
 
-let zhangsan = Person(firstName: "san", lastName: "zhang", age: 20, birthday: Date.init())
-let lisi = Person(firstName: "si", lastName: "li", age: 30, birthday: Date())
-let wangwu = Person(firstName: "wu", lastName: "wang", age: 40, birthday: Date())
-let persons = [zhangsan, lisi, wangwu]
+
+/*:
+ ## Creating Predicates Directly in Code
+ You can create predicate and expression instances directly in code. NSComparisonPredicate and NSCompoundPredicate provide convenience methods that allow you to easily create compound and comparison predicates respectively. NSComparisonPredicate provides a number of operators ranging from simple equality tests to custom functions.
+ 
+ */
+
+// predicate: revenue > 1000000 AND revenue < 2000000
+// predicate: age > 1000000 AND age < 2000000
+let lhs = NSExpression(forKeyPath: "age")
+
+let greaterRhs = NSExpression(forConstantValue: 1000000)
+let greaterThanPredicate = NSComparisonPredicate(
+    leftExpression: lhs,
+    rightExpression: greaterRhs,
+    modifier: .direct,
+    type: .greaterThan,
+    options: NSComparisonPredicate.Options.init(rawValue: 0))
+
+let lessThanRhs = NSExpression(forConstantValue: 2000000)
+let lessThanPredicate = NSComparisonPredicate(
+    leftExpression: lhs,
+    rightExpression: lessThanRhs,
+    modifier: .direct,
+    type: .lessThan,
+    options: NSComparisonPredicate.Options.init(rawValue: 0))
+
+let codePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [greaterThanPredicate, lessThanPredicate])
+let codeResult = codePredicate.evaluate(with: zhangsan)
+
+
+/*:
+ ## Creating Predicates Using Predicate Templates
+ Predicate templates offer a good compromise between the easy-to-use but potentially error-prone format string-based technique and the code-intensive pure coding approach. A predicate template is simply a predicate that includes a variable expression. (If you are using the Core Data framework, you can use the Xcode design tools to add predicate templates for fetch requests to your model—see Managed Object Models.) The following example uses a format string to create a predicate with a right-hand side that is a variable expression.
+ 
+ */
+
+
+
+
+//class Person:NSObject {
+//    @objc var firstName: String
+//    @objc var lastName: String
+//    @objc var age: Int
+//    @objc var birthday: Date
+//
+//    init(firstName: String, lastName: String, age: Int, birthday: Date) {
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        self.age = age
+//        self.birthday = birthday
+//    }
+//}
+//
+//let zhangsan = Person(firstName: "san", lastName: "zhang", age: 20, birthday: Date.init())
+//let lisi = Person(firstName: "si", lastName: "li", age: 30, birthday: Date())
+//let wangwu = Person(firstName: "wu", lastName: "wang", age: 40, birthday: Date())
+//let persons = [zhangsan, lisi, wangwu]
 
 
 let lastNameSearchString = "abcd"
@@ -75,8 +144,10 @@ let birthdaySearchDate = Date()
 /// %K: key path，用来替换变量名;
 /// %@: object value，用来替换变量值
 /// $VARIABLE_NAME: 用来表示Variables
+/// [c]: case-insensitive，大小写不敏感（即：A，a都可以）；修饰CONTAIN、LIKE等关键字
+/// [d]: diacritic-insensitive，读音不敏感（）
 
-/// LIKE用法
+/// %@
 // lastName LIKE lastNameSearchString
 let predicate = NSPredicate(format: "lastName like %@", lastNameSearchString)
 // 报错：“error: Execution was interrupted, reason: signal SIGABRT.” ？？？
@@ -90,12 +161,14 @@ let zhangsanLastName = "zhang"
 let cPredicate = NSPredicate(format: "%@ like %@", zhangsan.lastName, zhangsanLastName)
 let cResult = cPredicate.evaluate(with: zhangsan)
 
+/// %K
 // 定义propertyName用来存储属性名， value存储值
 let propertyName = "lastName"
 let value = "zhang"
 let dPredicate = NSPredicate(format: "%K like %@", propertyName, value)
 let dResult = dPredicate.evaluate(with: zhangsan)
 
+/// $VARIABLE_NAME
 // age > $AGE, 应用场景？？？
 let dollarPredicateTemp = NSPredicate(format: "age > $AGE")
 let dollarPredicate = dollarPredicateTemp.withSubstitutionVariables(["AGE": 5])
@@ -190,8 +263,14 @@ let notResult = notPredicate.evaluate(with: zhangsan)
  LIKE
  - The left hand expression equals the right-hand expression: ? and * are allowed as wildcard characters, where ? matches 1 character and * matches 0 or more characters.
  
+ MATCHES
+ - The left hand expression equals the right hand expression using a regex-style comparison according to ICU v3 (for more details see the ICU User Guide for Regular Expressions).
+ 
  UTI-CONFORMS-TO
  - ???
+ 
+ UTI-EQUALS
+ - ？？？
  
  */
 
@@ -223,6 +302,24 @@ let likeResult2 = likePredicate2.evaluate(with: zhangsan)
 let likePredicate3 = NSPredicate(format: "lastName LIKE 'z*g'")
 let likeResult3 = likePredicate2.evaluate(with: zhangsan)
 
+// MATCHES
+// lastName MATCHES "[A-Za-z]+"（表示：lastName 匹配一个正则表达式 "[A-Za-z]+"）
+let regex = "[A-Za-z]+"
+let matchesPredicate = NSPredicate(format: "lastName MATCHES %@", regex)
+let matchesResult = matchesPredicate.evaluate(with: zhangsan)
+
+/// like[cd] is a modified “like” operator that is case-insensitive and diacritic-insensitive.
+/// [c]: case-insensitive，大小写不敏感（即：A，a都可以）；修饰CONTAIN、LIKE等关键字
+/// [d]: diacritic-insensitive，读音不敏感（）
+let insensitiveString = "cafe"
+let diacriticString = "café"
+// SELF LIKE[c] "cafe"
+let caseInsensitivePredicate = NSPredicate(format: "SELF LIKE[c] %@", insensitiveString)
+let caseInsensitiveResult = caseInsensitivePredicate.evaluate(with: "Cafe")
+// SELF LIKE[d] "café"
+let diacriticInsensitivePredicate = NSPredicate(format: "SELF LIKE[d] %@", diacriticString)
+let diacriticInsensitiveResult = diacriticInsensitivePredicate.evaluate(with: "cafe")
+
 
 /*:
  ## Aggregate Operations（集合操作）
@@ -240,6 +337,11 @@ let likeResult3 = likePredicate2.evaluate(with: zhangsan)
  - Equivalent to an SQL IN operation, the left-hand side must appear in the collection specified by the right-hand side.
  - For example, name IN { 'Ben', 'Melissa', 'Nick' }. The collection may be an array, a set, or a dictionary—in the case of a dictionary, its values are used.
  - In Objective-C, you could create a IN predicate as shown in the following example:
+ /*:
+ - Example:
+ NSPredicate *inPredicate = [NSPredicate predicateWithFormat: @"attribute IN %@", aCollection];
+ */
+ where aCollection may be an instance of NSArray, NSSet, NSDictionary, or of any of the corresponding mutable classes.
  
  */
 
@@ -263,19 +365,21 @@ let noneResult = nonePredicate.evaluate(with: persons)
 let inPredicate = NSPredicate(format: "lastName IN %@", ["zhang", "li", "wang"])
 let inResult = inPredicate.evaluate(with: zhangsan)
 
-/// IN用法
-// SELF IN {"Stig", "Shaffiq", "Chris"}
-let bPredicate = NSPredicate(format: "SELF IN %@", ["Stig", "Shaffiq", "Chris"])
-let bresult = bPredicate.evaluate(with: "Shaffiq")
 
 
 /*:
  ## Literals
  Single and double quotes produce the same result, but they do not terminate each other. For example, "abc" and 'abc' are identical, whereas "a'b'c" is equivalent to a space-separated concatenation of a, 'b', c.
- 
- 
+
+ SELF
+ - Represents the object being evaluated.
+
  */
 
+/// SELF
+// SELF IN {"Stig", "Shaffiq", "Chris"}
+let selfPredicate = NSPredicate(format: "SELF IN %@", ["Stig", "Shaffiq", "Chris"])
+let selfresult = selfPredicate.evaluate(with: "Shaffiq")
 
 
 
