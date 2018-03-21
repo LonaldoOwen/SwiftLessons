@@ -100,7 +100,13 @@ let wildcardsResult = wildcardsPredicate.evaluate(with: "prefixxxxxxxxxsuffix")
 
 /*:
  ## Creating Predicates Directly in Code
- You can create predicate and expression instances directly in code. `NSComparisonPredicate` and `NSCompoundPredicate` provide convenience methods that allow you to easily create compound and comparison predicates respectively. `NSComparisonPredicate` provides a number of operators ranging from simple equality tests to custom functions.
+ You can create predicate and expression instances directly in code. `NSComparisonPredicate` and `NSCompoundPredicate` provide convenience methods that allow you to easily create compound and comparison predicates respectively. `NSComparisonPredicate` provides a number of operators ranging from simple equality tests to custom functions.\
+ 理解：\
+ 1、 \
+ 2、modifier: .direct, .all, .any; \
+ 3、type: The predicate operator type.\
+ 4、options: The options to apply (see NSComparisonPredicate.Options). For no options, pass 0.\
+ .caseInsensitive, .diacriticInsensitive, .normalized
  
  */
 
@@ -134,7 +140,8 @@ let codeResult = codePredicate.evaluate(with: zhangsan)
  \
  \
  理解：\
- 1、A predicate template is simply a predicate that includes a variable expression. 
+ 1、A predicate template is simply a predicate that includes a variable expression.\
+ 
  
  */
 
@@ -624,14 +631,15 @@ print(NSDictionary(object: NSNull(), forKey: NSExpression(forKeyPath: "firstName
  `NSPredicate` \
     A specialized predicate that you use to compare expressions.
  
- NSComparisonPredicate, NSCompoundPredicate（subclass of NSPredicate）\
+ NSComparisonPredicate, NSCompoundPredicate（subclass of NSPredicate）
  - `NSComparisonPredicate` \
         A definition of logical conditions used to constrain a search either for a fetch or for in-memory filtering.\
  - `NSCompoundPredicate` \
         A specialized predicate that evaluates logical combinations of other predicates.
  
  `NSExpression` \
-    An expression for use in a comparison predicate.
+    An expression for use in a comparison predicate.\
+    Expressions are created for constant values, key paths, and so on.
  
  */
 
