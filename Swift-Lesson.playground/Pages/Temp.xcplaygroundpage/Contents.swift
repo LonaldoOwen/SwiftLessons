@@ -253,6 +253,39 @@ let str1 = formater.string(from: now)
 print(str1)
 
 
+/// 面试题
+/// 求一个string中各字母出现的次数
+let appleString = "apple"
+
+// 方法1: 使用enumerated()
+var dictionary1 = [String: Int]()
+for (index, char) in appleString.enumerated(){
+    print("char: \(char), index: \(index)")
+    if dictionary1["\(char)"] == nil {
+        dictionary1["\(char)"] = 1
+    } else {
+        dictionary1["\(char)"] = dictionary1["\(char)"]! + 1
+    }
+}
+print("current dic: \(dictionary1)")
+for (index, element) in dictionary1.enumerated() {
+    print("index: \(index), element: \(element)")
+    print("\(element.key): \(element.value)")
+}
+
+// 方法2: 使用charactor
+var dictonary2 = [String: Int]()
+for charactor in appleString {
+    print(charactor)
+    let numbers = dictonary2["\(charactor)"]
+    if numbers == nil {
+        dictonary2["\(charactor)"] = 1
+    } else {
+        dictonary2["\(charactor)"] = numbers! + 1
+    }
+}
+print("dic2: \(dictonary2)")
+
 
 
 
