@@ -4,6 +4,8 @@
  # Generic
  */
 import Foundation
+import PlaygroundSupport
+
 
 
 
@@ -30,12 +32,75 @@ swapTwoValues(&someString, &anotherString)
 // someString is now "world", and anotherString is now "hello"
 
 
+/*
+/// Generic Types
 
-/// 
+// nongeneric version of a stack
+// IntStack遵从Container协议时，注释掉此处
+struct IntStack {
+    var items = [Int]()
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    mutating func pop() -> Int {
+        return items.removeLast()
+    }
+}
+
+// generic version of the same code
+// Stack遵从Container协议时，注释掉此处
+struct Stack<Element> {
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+}
+
+// For example, to create a new stack of strings, you write Stack<String>():
+var stackOfStrings = Stack<String>()
+stackOfStrings.push("uno")
+stackOfStrings.push("dos")
+stackOfStrings.push("tres")
+stackOfStrings.push("cuatro")
+// the stack now contains 4 strings
+
+// Popping a value from the stack removes and returns the top value, "cuatro":
+let fromTheTop = stackOfStrings.pop()
+// fromTheTop is equal to "cuatro", and the stack now contains 3 strings
 
 
+/// Extending a generic type
+// 扩展generic type时，不用提供type parameter list作为定义的一部分；
+// 相反，原始的type parameter list在新的扩展body内是可见的；
 
-// Type Constraints
+extension Stack {
+    // add a read-only computed property
+    var topItem: Element? {
+        return items.isEmpty ? nil : items[items.count - 1]
+    }
+}
+
+if let topItem = stackOfStrings.topItem {
+    print("The top item on the stack is \(topItem).")
+}
+// Prints "The top item on the stack is tres."
+*/
+
+
+/// Type Constraints
+
+// The basic syntax for type constraints on a generic function is shown below (although the syntax is the same for generic types):
+func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
+    // function body goes there
+}
+
+
+// Type Constraints in Action
+
+// Here’s a nongeneric function called findIndex(ofString:in:)
 func findIndex(ofString valueToFind: String, in array: [String]) -> Int? {
     for (index, value) in array.enumerated() {
         if value == valueToFind {
@@ -49,6 +114,18 @@ if let foundIndex = findIndex(ofString: "llama", in: strings) {
     print("The index of llama is \(foundIndex)")
 }
 // Prints"The index of llama is 2"
+
+// Here’s how you might expect a generic version of findIndex(ofString:in:), called findIndex(of:in:), to be written.
+// 这样写会提示编译错误；类型T并未实现“==”方法，因此，需要给类型T增加限制，让它遵从Equatable协议就可以了（Swift的standard type都遵从Equatable协议可以使用“==”方法）
+//func findIndex<T>(of valueToFind: T, in array: [T]) -> Int? {
+//    for (index, value) in array.enumerated() {
+//        if value == valueToFind {
+//            return index
+//        }
+//    }
+//    return nil
+//}
+// Binary operator '==' cannot be applied to two 'T' operands
 
 func findIndex<T: Equatable>(of valueToFind: T, in array: [T]) -> Int? {
     for (index, value) in array.enumerated() {
@@ -64,7 +141,12 @@ let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
 // stringIndex is an optional Int containing a value of 2
 
 
-// Associated Types
+
+/// # Associated Types
+
+
+// Associated Types in Action
+
 protocol Container {
     associatedtype Item // 声明Associated Type
     mutating func append(_ item: Item)
@@ -73,7 +155,131 @@ protocol Container {
 }
 
 
-// Generic Types
+
+// Here’s a version of the nongeneric IntStack type from Generic Types above, adapted to conform to the Container protocol:
+ struct IntStack: Container {
+    //original IntStack implementation
+    var items = [Int]()                     //实例化一个数组，存储的是Int类型
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    mutating func pop() -> Int {
+        return items.removeLast()
+    }
+
+    //conformance to the Container protocol
+    typealias Item = Int                    //inference by Swift
+    mutating func append(_ item: Int) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Int {
+        return items[i]
+    }
+ }
+
+var intStack1 = IntStack()
+intStack1.push(1)
+intStack1.push(2)
+//intStack1.push("3")       // 不支持String类型
+intStack1.items
+intStack1.pop()
+intStack1.items
+intStack1[0]                //
+
+// after conforming to the Container protocol
+intStack1.append(3)
+intStack1[0]
+intStack1.count
+
+// You can also make the generic Stack type conform to the Container protocol:
+struct Stack<Element>: Container {
+    // original Stack implementation
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+    
+    // conformance to the Container protocol
+    //typealias Item = Element                  // inference by Swift
+    mutating func append(_ item: Element) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Element {
+        return items[i]
+    }
+}
+
+
+// Extending an Existing Type to Specify an Associated Type
+// After defining this extension, you can use any Array as a Container.
+
+let tempArray = Array<String>()
+let tempDictionary = Dictionary<String, Any>()
+
+//extension Array: Container {}
+
+
+// Adding Constraints to an Associated Type
+//protocol Container {
+//    associatedtype Item: Equatable      // Adding Constraints to an Associated Type
+//    mutating func append(_ item: Item)
+//    var count: Int { get }
+//    subscript(i: Int) -> Item { get }
+//}
+// To conform to this version of Container, the container’s Item type has to conform to the Equatable protocol.
+
+
+// Using a Protocol in Its Associated Type’s Constraints
+protocol SuffixableContainer: Container {
+    associatedtype Suffix: SuffixableContainer where Suffix.Item == Item
+    func suffix(_ size: Int) -> Suffix
+}
+
+extension Stack: SuffixableContainer {
+    //typealias Suffix = Stack            //Inferred that Suffix is Stack.
+    func suffix(_ size: Int) -> Stack {
+        var result = Stack()
+        for index in (count-size)..<count {
+            result.append(self[index])
+        }
+        return result
+    }
+    // Inferred that Suffix is Stack.
+}
+var stackOfInts = Stack<Int>()
+stackOfInts.append(10)
+stackOfInts.append(20)
+stackOfInts.append(30)
+let suffix = stackOfInts.suffix(2)
+// suffix contains 20 and 30
+
+extension IntStack: SuffixableContainer {
+    //typealias Suffix = Stack<Int>     //Inferred that Suffix is Stack<Int> .
+    func suffix(_ size: Int) -> Stack<Int> {
+        var result = Stack<Int>()
+        for index in (count-size)..<count {
+            result.append(self[index])
+        }
+        return result
+    }
+    // Inferred that Suffix is Stack<Int>.
+}
+
+
+
+
+
+/*
+/// Generic Types
 // Int Stack
 
 struct IntStack {
@@ -101,30 +307,31 @@ extension IntStack: Container {
 }
 
 
-/*
- struct IntStack: Container {
- // original IntStack implementation
- var items = [Int]() // 实例化一个数组，存储的是Int类型
- mutating func push(_ item: Int) {
- items.append(item)
- }
- mutating func pop() -> Int {
- return items.removeLast()
- }
- 
- // conformance to the Container protocol
- typealias Item = Int // inference by Swift
- mutating func append(_ item: Int) {
- self.push(item)
- }
- var count: Int {
- return items.count
- }
- subscript(i: Int) -> Int {
- return items[i]
- }
- }
- */
+
+
+// struct IntStack: Container {
+//  original IntStack implementation
+// var items = [Int]()  实例化一个数组，存储的是Int类型
+// mutating func push(_ item: Int) {
+// items.append(item)
+// }
+// mutating func pop() -> Int {
+// return items.removeLast()
+// }
+//
+//  conformance to the Container protocol
+// typealias Item = Int  inference by Swift
+// mutating func append(_ item: Int) {
+// self.push(item)
+// }
+// var count: Int {
+// return items.count
+// }
+// subscript(i: Int) -> Int {
+// return items[i]
+// }
+// }
+
 
 var intStack1 = IntStack()
 intStack1.push(1)
@@ -142,17 +349,17 @@ intStack1.count
 
 
 // Generic Stack
-/*
- struct Stack<Element> {
- var items = [Element]()
- mutating func push(_ item: Element) {
- items.append(item)
- }
- mutating func pop() -> Element {
- return items.removeLast()
- }
- }
- */
+
+// struct Stack<Element> {
+// var items = [Element]()
+// mutating func push(_ item: Element) {
+// items.append(item)
+// }
+// mutating func pop() -> Element {
+// return items.removeLast()
+// }
+// }
+//
 struct Stack<Element>: Container {
     // original Stack implementation
     var items = [Element]()
@@ -273,6 +480,21 @@ extension Container where Item == Double {
 //stackOfInt.average()
 //stackOfFloat.average()
 stackOfDouble.average()
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
