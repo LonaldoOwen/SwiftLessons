@@ -2,6 +2,10 @@
 <playground version='6.0' target-platform='ios' display-mode='raw' executeOnSourceChanges='false'>
     <pages>
         <page name='Generic'/>
-        <page name='Generic Protocals'/>
+        <page name='Generic Where Clauses'/>
+        <page name='Extensions with a Generic Where Clause'/>
+        <page name='Associated Types with a Generic Where Clause'/>
+        <page name='Generic Subscripts'/>
+        <page name='Generic Protocols'/>
     </pages>
 </playground>
