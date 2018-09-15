@@ -2,6 +2,9 @@
  [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
  ****
  # Generic
+ 问题： \
+ 1、只是扒了代码，并无任何说明及解释；这样做的效果不会很好；怎么解决呢？？？
+ 解决办法：
  */
 import Foundation
 import PlaygroundSupport

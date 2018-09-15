@@ -2,6 +2,10 @@
 <playground version='6.0' target-platform='ios' display-mode='raw' executeOnSourceChanges='false'>
     <pages>
         <page name='Generic'/>
+        <page name='The Problem That Generics Solve'/>
+        <page name='Generic Types'/>
+        <page name='Type Constraints'/>
+        <page name='Associated Types'/>
         <page name='Generic Where Clauses'/>
         <page name='Extensions with a Generic Where Clause'/>
         <page name='Associated Types with a Generic Where Clause'/>
